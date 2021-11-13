@@ -1,0 +1,36 @@
+[tool.poetry]
+name = "timetables-parser-edupage"
+version = "1.0.0"
+description = "Edupage.org timetable parser library"
+readme = "README.md"
+authors = ["Kuba Szczodrzyński <kuba@szczodrzynski.pl>"]
+packages = [
+    { include = "timetables/parser/edupage" },
+]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+aiohttp = { extras = ["speedups"], version = "^3.8.0" }
+beautifulsoup4 = "^4.10.0"
+pydantic = "^1.8.2"
+timetables-lib = "^1.0.0"
+
+[tool.poetry.dev-dependencies]
+black = "^21.10b0"
+isort = "^5.10.1"
+
+[tool.poetry.scripts]
+edupage = "timetables.parser.edupage.cli:main"
+edupage-check = "timetables.parser.edupage.cli:check"
+edupage-register = "timetables.parser.edupage.cli:register"
+edupage-login = "timetables.parser.edupage.cli:login"
+edupage-join = "timetables.parser.edupage.cli:join"
+edupage-parse = "timetables.parser.edupage.cli:parse"
+
+[tool.black]
+# currently (2021-11-13) Black does not support Python 3.10's match statement
+extend-exclude = "parser.py"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
